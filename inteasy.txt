@@ -6,4 +6,4 @@ a^x:(1/Log\[E,a\])*a^x + C
 Sin\[x\]:-Cos\[x\] + C
 Cos\[x\]:Sin\[x\] + C
 1/(a^2+x^2):(1/a)*ArcTan\[x/a\] + C
-
+(Csc\[x\])^2:-Cot\[x\] + C
