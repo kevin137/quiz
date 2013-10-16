@@ -1,0 +1,2 @@
+./integral.txt:exp:int
+./inteasy.txt:expeasy:inteasy

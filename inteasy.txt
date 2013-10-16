@@ -1,0 +1,9 @@
+Integrate\[x,v\]:x*v - Integrate\[v,x\]
+x^n:(1/(n+1))*x^(n+1) + C, n<>-1
+1/x:Log\[E,Abs\[x\]\] + C
+E^x:E^x + C
+a^x:(1/Log\[E,a\])*a^x + C
+Sin\[x\]:-Cos\[x\] + C
+Cos\[x\]:Sin\[x\] + C
+1/(a^2+x^2):(1/a)*ArcTan\[x/a\] + C
+

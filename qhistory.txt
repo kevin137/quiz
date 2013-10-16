@@ -1,0 +1,577 @@
+    1  sudo apt-cache search
+    2  ls
+    3  cd /media/
+    4  ls
+    5  cd
+    6  cd /host
+    7  ls
+    8  cd gPodder/
+    9  ls
+   10  cd
+   11  exit
+   12  ls
+   13  rm examples.desktop 
+   14  ls
+   15  cd u1
+   16  ls
+   17  cd conf/
+   18  ls
+   19  cat mountNokia2700
+   20  cat mountNokia2700.txt 
+   21  ls
+   22  vi disconnect_u1.sh
+   23  ls
+   24  top
+   25  xinfo
+   26  ls
+   27  cd
+   28  ls
+   29  cd .config/
+   30  ls
+   31  cd cd ibus/
+   32  ls
+   33  ls -lashtr
+   34  cd
+   35  ls -lashhrt
+   36  cd .gnupg/
+   37  ls
+   38  man seahorse
+   39  ls
+   40  cat gpg.conf 
+   41  ls
+   42  cat pubring.gpg 
+   43  cat trustdb.gpg 
+   44  ls
+   45  seahorse --help
+   46  seahorse --help-all
+   47  cd
+   48  man gnupg
+   49  gpg --help
+   50  gpg --list-keys
+   51  gpg -K
+   52  cd .gpg
+   53  pwd
+   54  cd .gpg
+   55  cd .gnupg/
+   56  ls
+   57  rm secring.gpg 
+   58  ls
+   59  cd
+   60  twm
+   61  gnome-session-quit 
+   62  ls
+   63  cd Ubuntu\ One/
+   64  ls
+   65  cd
+   66  df -h
+   67  ls
+   68  ln -s u1 Ubuntu\ One/
+   69  ls
+   70  cd Ubuntu\ One/
+   71  ls
+   72  rm u1 
+   73  cd ..
+   74  ls
+   75  ln -s Ubuntu\ One/ u1
+   76  ls
+   77  cd u1/
+   78  ls
+   79  cat podcast 
+   80  ls
+   81  head podcast 
+   82  ls
+   83  cat gpodderTweak.pl 
+   84  ls
+   85  cd ref/
+   86  ls
+   87  cat chrome_history.txt 
+   88  cd
+   89  sudo apt-get update; sudo apt-get upgrade;
+   90  sudo apt-get install twm
+   91  cd
+   92  ls
+   93  man seahorse
+   94  ls
+   95  cd Vídeos/
+   96  ls
+   97  ls .lashrt
+   98  ls -lashrt
+   99  vlc
+  100  sudo apt-get install vlc-nox
+  101  ls
+  102  ls -lashrt
+  103  vlc S01V09\ \ Demo\ Setup\ -\ Lumped\ Elements.mp4 
+  104  ls
+  105  apt-cache search h264
+  106  file S01V01\ \ Motivation\ for\ 6.002x.mp4 
+  107  mplayer
+  108  sudo apt-get install mplayer2
+  109  ls
+  110  mplayer S01V01\ \ Motivation\ for\ 6.002x.mp4 
+  111  ls
+  112  ls -lashrt
+  113  mplayer S02V02\ \ Demo-\ KVL\ \ KCL.mp4 
+  114  ls
+  115  mplayer S02V08\ \ Method\ 3\ -\ Node\ Analysis.mp4 
+  116  ls
+  117  mkdir letitrun 
+  118  cd letitrun/
+  119  ls
+  120  cp ../default-e89b08_2.9.1-0.1-SNAPSHOT-one-jar.jar .
+  121  java -jar default-e89b08_2.9.1-0.1-SNAPSHOT-one-jar.jar k_137@yahoo.com mazdaahura ?
+  122  java -jar default-e89b08_2.9.1-0.1-SNAPSHOT-one-jar.jar k_137@yahoo.com mazdaahura -hd
+  123  ls -lashrt
+  124  watch ls -lashrt
+  125  ls
+  126  ls -lashrt
+  127  ls | less
+  128  ls
+  129  cat S27V01\ \ Review.srt 
+  130  ls
+  131  watch ls -lashrt
+  132  watch ls -lasht
+  133  df -h
+  134  watch ls -lasht
+  135  ls
+  136  cat linkies.txt 
+  137  ls
+  138  cd u1/
+  139  ls
+  140  cd ref/
+  141  ls
+  142  cd ..
+  143  cd
+  144  ls
+  145  cd Vídeos/
+  146  ls
+  147  rm S*
+  148  ls
+  149  cd letitrun/
+  150  ls
+  151  d
+  152  cd
+  153  ls
+  154  sudo apt-get install bsd-games
+  155  sudo apt-get install bsd
+  156  apt-cache search
+  157  apt-cache search bsd games
+  158  sudo apt-get install bsd-games
+  159  sudo apt-get install bsdgames
+  160  quiz
+  161  quiz arthmetic answer
+  162  quiz artihmetic answer
+  163  quiz arithmetic answer
+  164  *
+  165  ls
+  166  clear
+  167  quiz arithmetic answer
+  168  man quiz
+  169  cd /usr/share/
+  170  cd games/bsdgames/
+  171  ls
+  172  cd quiz/
+  173  ls
+  174  cat arith 
+  175  less arith 
+  176  man quiz
+  177  cp arith /home/usuario/
+  178  cp index /home/usuario/
+  179  cd
+  180  ls
+  181  vi arith 
+  182  ls
+  183  cat linkies.txt 
+  184  rm linkies.txt 
+  185  ls
+  186  head arith 
+  187  cat index 
+  188  ls
+  189  cp arith sumas
+  190  vi sumas 
+  191  vi index 
+  192  ls
+  193  quiz -t -i ./index arith ans
+  194  cllear
+  195  clear
+  196  quiz -t -i ./index arith ans
+  197  ls
+  198  vi sumas 
+  199  quiz -t -i ./index arith ans
+  200  vi sumas 
+  201  PS1=
+  202  ls
+  203  PS1=>
+  204  ls
+  205  PS1=\>
+  206  PS1=\>\ 
+  207  ls
+  208  man perl
+  209  man perlrun
+  210  perl -e 'print "hi\n"'
+  211  perl -e 'for $i (0..5) { print $i}'
+  212  perl -e 'for $i (0..9) { for $j (0..9)  }'
+  213  perl -e 'for $i (0..9) { for $j (0..9) { print "$i + $j"} }'
+  214  perl -e 'for $i (0..9) { for $j (0..9) { print "$i + $j = ".$i+$j."\n" } }'
+  215  perl -e 'for $i (0..9) { for $j (0..9) { print "$i + $j = \n" } }'
+  216  perl -e 'for $i (0..9) { for $j (0..9) { print "$i + $j = \n"."a" } }'
+  217  perl -e 'for $i (0..9) { for $j (0..9) { print "$i + $j = ".$i+$j."\n" } }'
+  218  perl -e 'for $i (0..9) { for $j (0..9) { print "$i + $j = ".($i+$j)."\n" } }'
+  219  PS1=\#\ 
+  220  ls
+  221  cat arith 
+  222  perl -e 'for $i (0..9) { for $j (0..9) { print "$i + $j = :".($i+$j)."\n" } }'
+  223  perl -e 'for $i (0..9) { for $j (0..9) { print "$i + $j = :".($i+$j)."\n" } }' > sumas
+  224  cat sumas 
+  225  quiz -t -i ./index arith ans
+  226  perl -e 'for $i (0..9) { for $j (0..9) { print "$i - $j = :".($i-$j)."\n" } }' > restas
+  227  cat restas 
+  228  perl -e 'for $i (0..9) { for $j (0..9) { print "$i * $j = :".($i*$j)."\n" } }' > multis
+  229  cat multis 
+  230  perl -e 'for $i (0..15) { for $j (0..15) { print "$i + $j = :".($i+$j)."\n" } }' > sumas
+  231  perl -e 'for $i (0..15) { for $j (0..15) { print "$i - $j = :".($i-$j)."\n" } }' > restas
+  232  perl -e 'for $i (0..15) { for $j (0..15) { print "$i * $j = :".($i*$j)."\n" } }' > multis
+  233  ls
+  234  cat sumas restas multis > arith 
+  235  vi index 
+  236  quiz -t -i ./index arith ans
+  237  ls
+  238  cat arith 
+  239  less arith 
+  240  ls
+  241  vi index 
+  242  mv arith all
+  243  vi index 
+  244  quiz -t -i ./index arith ans
+  245  ls
+  246  mv all arith
+  247  quiz -t -i ./index arith ans
+  248  wc -l arith 
+  249  bc
+  250  ls
+  251  man quiz
+  252  man alias
+  253  alias --help
+  254  alias quiz=quiz -t -i .\index
+  255  ls
+  256  cd Vídeos/
+  257  ls
+  258  mkdir Week14
+  259  mkdir Week13
+  260  mkdir Week12
+  261  mkdir Week11
+  262  history
+  263  exit
+  264  cd Vídeos/
+  265  ls
+  266  cd Week14/
+  267  ls
+  268  man nice
+  269  nice --help
+  270  nice -n 15 java -jar ../default-e89b08_2.9.1-0.1-SNAPSHOT-one-jar.jar k_137@yahoo.com mazdaahura "Week 14" -hd
+  271  ls
+  272  nice java -jar ../default-e89b08_2.9.1-0.1-SNAPSHOT-one-jar.jar k_137@yahoo.com mazdaahura "Week 14" -hd
+  273  ls
+  274  ls -lashrt
+  275  rm *S
+  276  rm *S*
+  277  ls
+  278  cd ..
+  279  cd Week11
+  280  ls
+  281  nice java -jar ../default-e89b08_2.9.1-0.1-SNAPSHOT-one-jar.jar k_137@yahoo.com mazdaahura "Week 11" -hd
+  282  cd Vídeos/Week14/
+  283  ls
+  284  nice -15 ls
+  285  nice +15 ls
+  286  man nice
+  287  nice
+  288  nice --adjustment=15 java ../default-e89b08_2.9.1-0.1-SNAPSHOT-one-jar.jar k_137@yahoo.com mazdaahura "Week 14" -hd
+  289  nice --adjustment=15 java -jar ../default-e89b08_2.9.1-0.1-SNAPSHOT-one-jar.jar k_137@yahoo.com mazdaahura "Week 14" -hd
+  290  nice --adjustment=15 java -jar ../default-e89b08_2.9.1-0.1-SNAPSHOT-one-jar.jar k_137@yahoo.com mazdaahura ?
+  291  nice --adjustment=10 java -jar ../default-e89b08_2.9.1-0.1-SNAPSHOT-one-jar.jar k_137@yahoo.com mazdaahura ?
+  292  java -jar ../default-e89b08_2.9.1-0.1-SNAPSHOT-one-jar.jar k_137@yahoo.com mazdaahura ek 14" -hd
+  293  ls
+  294  find .
+  295  ls
+  296  quiz -t -i ./index arith ans
+  297  ls
+  298  cat times.txt 
+  299  cat session.txt 
+  300  man join
+  301  join times.txt session.txt 
+  302  cat session.txt | grep Right
+  303  cat session.txt | lc Right
+  304  stat session.txt 
+  305  man stat
+  306  man coreutils
+  307  wc -l session.txt 
+  308  wc -l times.txt 
+  309  xsetroot 
+  310  xsetroot -solid blak
+  311  xsetroot -solid black
+  312  histtory
+  313  history
+  314  ls
+  315  cat sumas 
+  316  perl -e 'for $i (0..9) { for $j (0..9) { print "$i + $j = :".($i+$j)."\n" } }' > henry
+  317  vi index 
+  318  quiz -t -i ./index arith ans
+  319  vi index 
+  320  quiz -t -i ./index henry ans
+  321  perl -e 'for $i (0..5) { for $j (0..5) { print "$i + $j = :".($i+$j)."\n" } }' > henry
+  322  quiz -t -i ./index henry ans
+  323  quiz -t -i ./index arith ans
+  324  man script
+  325  ls
+  326  man script
+  327  script -f --times=times.txt
+  328  script -f --timimg=times.txt
+  329  script -f --timimg=times.txt session.txt
+  330  script -f -t times.txt session.txt
+  331  ls
+  332  cat times.txt 
+  333  rm times.txt 
+  334  ls
+  335  script -f -timming=times.txt session.txt
+  336  cat imming\=times.txt 
+  337  ls
+  338  cat session.txt
+  339  ls
+  340  mv imming\=times.txt times.txt
+  341  ls
+  342  man script
+  343  scriptreplay 
+  344  scriptreplay -t times.txt session.txt 
+  345  ls
+  346  rm session.txt times.txt 
+  347  script -f -ttimes.txt session.txt
+  348  ls
+  349  scriptreplay -t times.txt session.txt 
+  350  ls
+  351  rm session.txt times.txt 
+  352  man script
+  353  man quiz
+  354  quiz -t -i ./index arith ans
+  355  man script
+  356  script -f -ttimes.txt -c quiz -t -i ./index arith session.txt
+  357  script -f -ttimes.txt -c 'quiz -t -i ./index arith' session.txt
+  358  pwd
+  359  script -f -ttimes.txt -c 'quiz -t -i /home/usuario/index arith' session.txt
+  360  script -f -ttimes.txt -c session.txt
+  361  script -f -ttimes.txt session.txt
+  362  sudo apt-get install build-essential 
+  363  sudo apt-get update
+  364  sudo apt-get install build-essential 
+  365  sudo apt-get install build-essential --fix-missing
+  366  sudo shutdown
+  367  sudo shutdown -h now
+  368  ls
+  369  ls -lahrt
+  370  rm  ©‘’NNº×÷’Nº×÷ΩΩŁ¢ΩŁ¢ΩŁ¢ΩŁ¢Æ§ÐÆ§ÐÆ§Ð§§§ÆÆÆÆ§§§§§§§Æ§ÐÆ§ÐÆ§Æ§ÐÆÆª§ÆŊ 
+  371  ls
+  372  histry
+  373  history
+  374  cd /host/gPodder/
+  375  ls
+  376  cd Downloads/
+  377  ls
+  378  cd AllPolitics/
+  379  ls
+  380  ls -lashrt
+  381  vlc --help
+  382  vlc --help | less
+  383  ls -lashrt
+  384  vlc npr_158537976.mp3 
+  385  vlc --hlpe
+  386  vlc --help
+  387  vlc --help | grep open
+  388  vlc --open npr_158537976.mp3 
+  389  vlc --open /host/gPodder/Downloads/AllPolitics/npr_158537976.mp3 
+  390  vlc &
+  391  ps
+  392  killall vlc
+  393  ps
+  394  killall vlc
+  395  ps
+  396  killall vlc
+  397  fg
+  398  ps
+  399  nautilus .
+  400  ls
+  401  cd Unknown/
+  402  ls
+  403  cd ..
+  404  ls
+  405  vlc -v
+  406  cvlc npr_158537976.mp3 
+  407  ls
+  408  cd
+  409  ls
+  410  history
+  411  hgrep quiz
+  412  history | grep quiz
+  413  script -f -ttimes.txt -c 'quiz -t -i /home/usuario/index arith' session.txt
+  414  ls
+  415  history | grep quiz
+  416  quiz -t -i ./index arith ans
+  417  quiz -t -i ./index henry ans
+  418  quiz -t -i ./index arith ans
+  419  dc
+  420  bc
+  421  sudo shutdown -h now
+  422  ls -lashrt
+  423  cat index 
+  424  history
+  425  history | less
+  426  history | grep perl
+  427  history | grep multis
+  428  history > quiz_arith_gen
+  429  vi quiz_arith_gen 
+  430  mv quiz_arith_gen quiz_arith_gen.txt
+  431  ls
+  432  tar cvf arith.tar arith henry index quiz_arith_gen.txt 
+  433  ls
+  434  scp arith.tar kcook@192.168.0.16:/
+  435  ls
+  436  scp arith.tar kcook@192.168.0.16:
+  437  ls
+  438  cat quiz_arith_gen.txt 
+  439  perl -e 'for $i (11..15) { for $j (11..15) { print "$i * $j = :".($i*$j)."\n" } } > multis1115
+  440  perl -e 'for $i (11..15) { for $j (11..15) { print "$i * $j = :".($i*$j)."\n" } }' > multis1115
+  441  cat multis1115 
+  442  vi index 
+  443  quiz -t -i ./index multis1115 ans
+  444  vi index 
+  445  sudo shutdown -h now
+  446  ssh kcook@192.168.0.16
+  447  arithmetic --help
+  448  arithmetic -o - -r 12
+  449  arithmetic -o x -r 10
+  450  ls
+  451  ++
+  452  xrandr
+  453  gnome-session-properties 
+  454  gnome-power-statistics 
+  455  ls
+  456  which gnome-terminal
+  457  cd /usr/bin
+  458  ls
+  459  ls | more
+  460  on_ac_power 
+  461  man on_ac_power
+  462  man oakdecode
+  463  ls
+  464  man zsoelim
+  465  man yelp
+  466  yes
+  467  l
+  468  ls
+  469  ll
+  470  cd
+  471  alias
+  472  alert
+  473  man notify-send 
+  474  notify-send bla
+  475  alert zoinkers
+  476  man notify-send
+  477  cat alias
+  478  alias
+  479  alert ls -lashrt
+  480  alert ls 
+  481  alert crap
+  482  alert gazongas
+  483  alert crap
+  484  alert
+  485  alias
+  486  alert find /
+  487  alert find / -name ls
+  488  man notify-send
+  489  man notify-send 
+  490  alias
+  491  notify-send bla
+  492  notify-send -i bla
+  493  notify-send -i 
+  494  notify-send -i icon
+  495  notify-send -i icon asdf
+  496  man notify-send
+  497  alias
+  498  history | tail -n1
+  499  history | tail -n1 | sed -e
+  500  alias
+  501  history | tail -n1 | sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\''
+  502  history | tail -n1 | sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'
+  503  history | tail -n1 | sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'''
+  504  ls
+  505  alert date
+  506  alert `date`
+  507  man alert
+  508  man at
+  509  man umask
+  510  ls
+  511  pyversions 
+  512  pyversions -v
+  513  ls
+  514  valgrind
+  515  mongoose
+  516  sudo reboot
+  517  sudo apt-get update; sudo apt-get upgrade;
+  518  sudo shutdown -h now
+  519  du -h Vídeos/
+  520  ls
+  521  cd cd Vídeos/
+  522  cd Vídeos/
+  523  ls
+  524  cd
+  525  du -h
+  526  arithmetic -o - -r 12
+  527  cat sumas 
+  528  quiz -t -i ./index arith ans
+  529  ls
+  530  cat multis
+  531  ls
+  532  cat henry 
+  533  ls
+  534  cp multis henry2
+  535  vi henry
+  536  vi henry2
+  537  quiz -t -i ./index henry2 ans
+  538  vi index 
+  539  quiz -t -i ./index henry2 ans
+  540  vi index 
+  541  quiz -t -i ./index henry2 ans
+  542  ls
+  543  cp henry2 henry3
+  544  vi henry2 
+  545  vi index 
+  546  quiz -t -i ./index henry2 ans
+  547  ls
+  548  quiz -t -i ./index multis1115 ans
+  549  quiz -t -i ./index multis ans
+  550  ext
+  551  ex5t
+  552  exit
+  553  quiz -t -i ./index multis ans
+  554  quiz -t -i ./index henry2 ans
+  555  history | tail -n1 | sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\''
+  556  perl -e 'for $i (0..1) { for $j (6) { print "$i * $j = :".($i*$j)."\n" } } > m6
+  557  perl -e 'for $i (0..1) { for $j (6) { print "$i * $j = :".($i*$j)."\n" } }' > m6
+  558  cat m6
+  559  perl -e 'for $i (0..10) { for $j (6) { print "$i * $j = :".($i*$j)."\n" } }' > m6
+  560  cat m6
+  561  perl -e 'for $i (0..10) { for $j (7) { print "$i * $j = :".($i*$j)."\n" } }' > m7
+  562  perl -e 'for $i (0..10) { for $j (8) { print "$i * $j = :".($i*$j)."\n" } }' > m8
+  563  perl -e 'for $i (0..10) { for $j (9) { print "$i * $j = :".($i*$j)."\n" } }' > m9
+  564  ls
+  565  cat m6
+  566  ls
+  567  cat index 
+  568  vi index 
+  569  quiz -t -i ./index m8 ans
+  570  time quiz -t -i ./index m8 ans
+  571  time quiz -t -i ./index m6 ans
+  572  perl -e 'for $i (0..10) { for $j (10) { print "$i * $j = :".($i*$j)."\n" } }' > m10
+  573  vi index 
+  574  time quiz -t -i ./index m10 ans
+  575  ls
+  576  history
+  577  history > qhistory.txt

@@ -1,0 +1,8 @@
+perl -e 'for $i (0..15) { for $j (0..15) { print "$i + $j = :".($i+$j)."\n" } }' > sumas
+perl -e 'for $i (0..15) { for $j (0..15) { print "$i - $j = :".($i-$j)."\n" } }' > restas
+perl -e 'for $i (0..15) { for $j (0..15) { print "$i * $j = :".($i*$j)."\n" } }' > multis
+cat sumas restas multis > arith 
+perl -e 'for $i (0..5) { for $j (0..5) { print "$i + $j = :".($i+$j)."\n" } }' > henry
+quiz -t -i ./index henry ans
+quiz -t -i ./index arith ans
+
