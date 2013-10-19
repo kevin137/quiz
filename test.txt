@@ -1,0 +1,2 @@
+1/x:Log\[E,Abs\[x\]\] + C
+E^x:E^x + C
