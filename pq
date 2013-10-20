@@ -1,23 +1,24 @@
 #!/usr/bin/python
+import fileinput
 import time
-
-print "Python Quiz System\n"
 
 quiz = {}
 
-f = file('test.txt', 'r')
-for line in f:
-	#print '### line --->' + line + '<---'
-	clean = line.rstrip()
-	#print '### clean --->' + clean + '<---'
-	filt = clean.replace('\\','')
-	#print '### filt --->' + filt + '<---'
-	q,a = filt.split(":")
-	#print 'question is ' + q + '  answer is ' + a
-	quiz[q] = a;
-	#print ' '
 
-f.close()
+#f = file("test.txt", 'r')
+#for line in f:
+for line in fileinput.input():
+			#print '### line --->' + line + '<---'
+	clean = line.strip()
+			#print '### clean --->' + clean + '<---'
+	filt = clean.replace('\\','')
+			#print '### filt --->' + filt + '<---'
+	q,a = filt.split(":")
+			#print 'question is ' + q + '  answer is ' + a
+	quiz[q] = a;
+			#print ' '
+
+#f.close()
 print ' '
 
 words = quiz.keys()
@@ -29,6 +30,8 @@ for w in words:
 	if s == quiz[w]:
 		#print 'Right answer in '+str(round(elapsed,2))+' seconds \n'
 		print 'Right!'
+	elif s == "":
+		print quiz[w]
 	else:
 		#print 'given answer was ' + s + ' correct answer is ' + quiz[w]
 		print 'What?\n'
