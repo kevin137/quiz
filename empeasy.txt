@@ -1,0 +1,18 @@
+Augustus:Tiberius 14
+Tiberius:Caligula 37
+Caligula:Claudius 41
+Claudius:Nero 54
+Nero:Galba 68
+Galba:Otho 69
+Otho:Vitellius 69
+Vitellius:Vespasian 69
+Vespasian:Titus 79
+Titus:Domitian 81
+Domitian:Nerva 96
+Nerva:Trajan 98
+Trajan:Hadrian 117
+Hadrian:Antoninus Pius 138
+Antoninus Pius:Lucius Verus 161
+Lucius Verus:Marcus Aurelius 169
+Marcus Aurelius:Commodus 177
+Commodus:Pertinax 192

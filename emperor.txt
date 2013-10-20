@@ -1,0 +1,40 @@
+Augustus:Tiberius 14
+Tiberius:Caligula 37
+Caligula:Claudius 41
+Claudius:Nero 54
+Nero:Galba 68
+Galba:Otho 69
+Otho:Vitellius 69
+Vitellius:Vespasian 69
+Vespasian:Titus 79
+Titus:Domitian 81
+Domitian:Nerva 96
+Nerva:Trajan 98
+Trajan:Hadrian 117
+Hadrian:Antoninus Pius 138
+Antoninus Pius:Lucius Verus 161
+Lucius Verus:Marcus Aurelius 169
+Marcus Aurelius:Commodus 177
+Commodus:Pertinax 192
+Pertinax:Didius Julianus 193
+Didius Julianus:Septimius Severus 193
+Septimius Severus:Caracalla 211
+Caracalla:Geta 
+Geta:Macrinus
+Macrinus:Elagabalus
+Elagabalus:Severus Alexander
+Severus Alexander:Maximinus 235
+Maximinus:Gordian I 238
+Maximinus:Gordian II 238 ????????
+Gordian II:Pupienus 238
+Pupienus:Balbinus 238
+Balbinus:Gordian III 238
+Gordian III:Phillip I 244
+Phillip I:Trajan Decius 249
+Trajan Decius:Hostilian 251
+Hostilian:Trebonianus Gallus 251
+Trebonianus Gallus:Aemilian 253
+Aemilian:Valerian 253
+Valerian:Gallienus 260
+Gallienus:Claudius Gothicus 268
+
