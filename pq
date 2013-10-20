@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import time
 
 print "Python Quiz System\n"
 
@@ -19,14 +20,16 @@ for line in f:
 f.close()
 print ' '
 
-#words = ['cat', 'window', 'defenestrate']
 words = quiz.keys()
 for w in words:
-	#print w, len(w)
-	print w
+	print w + '?'
+	start = time.time()
 	s = raw_input('')
+	elapsed = (time.time() - start)
 	if s == quiz[w]:
-		print 'Right\n'
+		#print 'Right answer in '+str(round(elapsed,2))+' seconds \n'
+		print 'Right!'
 	else:
-		print 'given answer was ' + s + ' correct answer is ' + quiz[w]
+		#print 'given answer was ' + s + ' correct answer is ' + quiz[w]
+		print 'What?\n'
 
