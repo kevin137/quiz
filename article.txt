@@ -1,0 +1,5 @@
+señal:la
+enlace:el
+sistema:el
+estructura:la
+línea:la

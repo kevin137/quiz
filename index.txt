@@ -1,2 +1,3 @@
 ./integral.txt:exp:int
 ./inteasy.txt:expeasy:inteasy
+./article.txt:pala:art

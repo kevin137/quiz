@@ -19,7 +19,7 @@ for line in fileinput.input():
 			#print ' '
 
 #f.close()
-print ' '
+#print ' '
 
 words = quiz.keys()
 for w in words:
