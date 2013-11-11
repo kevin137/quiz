@@ -23,16 +23,16 @@ for line in fileinput.input():
 
 words = quiz.keys()
 for w in words:
-	print w + '?'
+	print(w + '?')
 	start = time.time()
-	s = raw_input('')
+	s = input('')
 	elapsed = (time.time() - start)
 	if s == quiz[w]:
-		#print 'Right answer in '+str(round(elapsed,2))+' seconds \n'
-		print 'Right!'
+		print('Right answer in '+str(round(elapsed,2))+' seconds \n')
+		#print('Right!')
 	elif s == "":
-		print quiz[w]
+		print(quiz[w])
 	else:
-		#print 'given answer was ' + s + ' correct answer is ' + quiz[w]
-		print 'What?\n'
+		print('given answer was ' + s + ' correct answer is ' + quiz[w])
+		#print('What?\n')
 
