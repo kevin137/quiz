@@ -38,3 +38,22 @@ Aemilian:Valerian 253
 Valerian:Gallienus 260
 Gallienus:Claudius Gothicus 268
 
+Constantine
+¿Jovian?
+Valens
+Theodosius
+Arcadius
+Theodosius II
+Marcian
+Leo
+Zeno
+Anastasius
+Justin
+Justinian
+Justin II
+Tiberius II
+Maurice
+Phocus
+
+
+
