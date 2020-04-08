@@ -1,13 +1,12 @@
-#!/usr/bin/python
-import fileinput
+#!/usr/bin/python3
 import time
 
 quiz = {}
 
 
-#f = file("test.txt", 'r')
-#for line in f:
-for line in fileinput.input():
+f = open("test.txt", 'r')
+for line in f:
+#for line in fileinput.input():
 			#print '### line --->' + line + '<---'
 	clean = line.strip()
 			#print '### clean --->' + clean + '<---'
