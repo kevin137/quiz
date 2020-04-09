@@ -39,6 +39,8 @@ BSDQUIZ_INDEX_FILE=BSDQUIZ_DATA_DIRECTORY+'/index'
 def customize_cmdline_parser(p):
   p.add_argument('-t', '--tutorial', \
     action='store_true', help='Use tutorial mode')
+  p.add_argument('-d', '--default', \
+    action='store_true', help='Use default question set')
   p.add_argument('-i', '--index_file', \
     nargs='?', type=argparse.FileType('r'), default=None)
   p.add_argument('question', nargs='?')
@@ -84,7 +86,9 @@ elif cmdline_args.question and not cmdline_args.answer:
 else:
   print('we will now show the possible categories')
   print(index_blob)
-  print('and proceed to completely ignore them and use the embedded default_question_list')
+
+if cmdline_args.default:
+  print('using embedded default_question_list')
   for line in default_question_list.splitlines():
     clean = line.strip()
     filt = clean.replace('\\','')
@@ -299,6 +303,7 @@ javascript_css_html_code_="""`
         html {
             font-family: Helvetica, Arial, sans-serif;
             font-size: 100%;
+            color: #333; 
             background: #333;
         }
     
