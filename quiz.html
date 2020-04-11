@@ -1,36 +1,33 @@
 #<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Quiz</title><script>shim=`
 default_question_list="""`; default_question_list = `
-integrand:integral
+#integrand:integral
 Int u*dv:u*v-Int v du
-#x^n (n!=1):(x^(n+1))/(n+1)+C
-1/x:Log[Abs[x]]+C
+x^n (n!=1):(x^(n+1))/(n+1)+C
+1/x:Log\[Abs\[x\]\]+C
 E^x:E^x+C
-a^x:(a^x)/Log[a]+C
-Sin[x]:-Cos[x]+C
-Cos[x]:Sin[x]+C
-(Sec[x])^2:Tan[x]+C
-(Csc[x])^2:-Cot[x]+C
-(Sec[x])*(Tan[x]):Sec[x]+C
-(Csc[x])*(Cot[x]):-Csc[x]+C
-#Tan[x]:Log[Abs[Sec[x]]]+C
-#Cot[x]:Log[Abs[Sin[x]]]+C
-#Sec[x]:Log[Abs[Sec[x]+Tan[x]]]+C
-#Csc[x]:Log[Abs[Csc[x]-Cot[x]]]+C
-{G{eorge} }Washington:1789-{17}97
-{J{ohn} }Adams:1797-1801
-{T{homas} }Jefferson:1801-{{18}0}9
-{J{ames} }Madison:1809-{18}17
-#(a^2-x^2)^(-1/2):ArcSin[x/a]+C
-(a^2+x^2)^(-1):(1/a)*ArcTan[x/a]+C
-#(x*Sqrt[x^2-a^2])^(-1):(1/a)*ArcSec[x/a]+C
-#(a^2-x^2)^(-1):(1/(2*a))*Log[Abs[(x+a)/(x-a)]]+C
-#(x^2-a^2)^(-1):(1/(2*a))*Log[Abs[(x-a)/(x+a)]]+C
+a^x:(a^x)/Log\[a\]+C
+Sin\[x\]:-Cos\[x\]+C
+Cos\[x\]:Sin\[x\]+C
+(Sec\[x\])^2:Tan\[x\]+C
+(Csc\[x\])^2:-Cot\[x\]+C
+(Sec\[x\])*(Tan\[x\]):Sec\[x\]+C
+(Csc\[x\])*(Cot\[x\]):-Csc\[x\]+C
+Tan\[x\]:Log\[Abs\[Sec\[x\]\]\]+C
+Cot\[x\]:Log\[Abs\[Sin\[x\]\]\]+C
+Sec\[x\]:Log\[Abs\[Sec\[x\]+Tan\[x\]\]\]+C
+Csc\[x\]:Log\[Abs\[Csc\[x\]-Cot\[x\]\]\]+C
+(a^2-x^2)^(-1/2):ArcSin\[x/a\]+C
+(a^2+x^2)^(-1):(1/a)*ArcTan\[x/a\]+C
+(x*Sqrt\[x^2-a^2\])^(-1):(1/a)*ArcSec\[x/a\]+C
+(a^2-x^2)^(-1):(1/(2*a))*Log\[Abs\[(x+a)/(x-a)\]\]+C
+(x^2-a^2)^(-1):(1/(2*a))*Log\[Abs\[(x-a)/(x+a)\]\]+C
 `; python_code = `"""
-
+import re
 import sys
 import time
 import argparse
-quiz = {}
+
+ESCAPING='\x5c'
 
 DEFAULT_INDEX_FILE='./index'
 BSDQUIZ_DATA_DIRECTORY='/usr/share/games/bsdgames/quiz'
@@ -41,24 +38,114 @@ def customize_cmdline_parser(p):
     action='store_true', help='Use tutorial mode')
   p.add_argument('-d', '--default', \
     action='store_true', help='Use default question set')
+  p.add_argument('-q', '--question_file', \
+    nargs='?', type=argparse.FileType('r'), default=None)
   p.add_argument('-i', '--index_file', \
     nargs='?', type=argparse.FileType('r'), default=None)
   p.add_argument('question', nargs='?')
   p.add_argument('answer', nargs='?')
 
-def adapt_regexp(t):
-  return(t)  
+class RegexpTransformer:
+  """transformation stuff"""
+  protect = { 
+    r'\:': 'RAWESCAPEDCOLON',
+    r'\|': 'RAWESCAPEDPIPE',
+    r'|': 'RAWPIPE',
+    r'\(': 'RAWESCAPEDLEFTPAREN',
+    r'\)': 'RAWESCAPEDRIGHTPAREN',
+    r'(': 'RAWLEFTPAREN',
+    r')': 'RAWRIGHTPAREN',
+    r'\[': 'RAWESCAPEDLEFTBRACKET',
+    r'\]': 'RAWESCAPEDRIGHTBRACKET',
+    r'[': 'RAWLEFTBRACKET',
+    r']': 'RAWRIGHTBRACKET',
+    r'\{': 'RAWESCAPEDLEFTCURLY',
+    r'\}': 'RAWESCAPEDRIGHTCURLY',
+    r'{': 'RAWLEFTCURLY',
+    r'}': 'RAWRIGHTCURLY',
+    r'\)?': 'ZOINKERS'
+  }
+  transform = { 
+    'RAWESCAPEDCOLON': r'\:',
+    'RAWESCAPEDPIPE': r'\|', 
+    'RAWPIPE': r'|',
+    'RAWESCAPEDLEFTPAREN': r'\(',
+    'RAWESCAPEDRIGHTPAREN': r'\)',
+    'RAWLEFTPAREN': r'\(',
+    'RAWRIGHTPAREN': r'\)',
+    'RAWESCAPEDLEFTBRACKET': r'\[',
+    'RAWESCAPEDRIGHTBRACKET': r'\]',
+    'RAWLEFTBRACKET': r'(',
+    'RAWRIGHTBRACKET': r')',
+    'RAWESCAPEDLEFTCURLY': r'\{',
+    'RAWESCAPEDRIGHTCURLY': r'\}',
+    'RAWLEFTCURLY': r'(',
+    'RAWRIGHTCURLY': r')?',
+    'ZOINKERS': r'\\)?',
+  }
+  def adapt_regexp(self,t):
+    tmp = t
+    for i in [ '\:','\|','|','\(','\)','(',')','\[','\]','[',']','\{','\}','{','}','\)?' ]:
+      tmp = tmp.replace(i,RegexpTransformer.protect[i])
+    tmp = re.escape(tmp)
+    for k in RegexpTransformer.transform.keys():
+      tmp = tmp.replace(k,RegexpTransformer.transform[k])
+    tmp = r'^' + tmp + r'$'
+    return tmp
+
+class FactBundle:
+  """fact stuff for quizes"""
+  template_literal_re=re.compile(r'^'+'\x60')
+  header_marker_re=re.compile(r'^'+'#')
+  def __init__(self):
+    self.re_t = RegexpTransformer()
+    self.outer_bundle_map = {}
+  def dump(self):  
+    for k, v in self.outer_bundle_map.items():
+      print('  key= >>' + k + '<<')
+      print(v)
+  def import_questions(self, textblob):  
+    for line in textblob.splitlines():
+      clean = line.strip()
+      print('>>'+clean+'<<')
+      template_literal_re=re.compile(r'^'+'\x60')
+      header_marker_re=re.compile(r'^'+'#')
+      if re.match(template_literal_re,clean):
+        print('LINE DISQUALIFIED, WILL IGNORE >>'+clean+'<<')
+      elif re.match(header_marker_re,clean):
+        print('LINE DETECTED AS HEADER, WILL PROCESS >>'+clean+'<<')
+      else:
+        delim = re.compile(r'[^\\]\:')
+        slice_array = []
+        ready_for_regex_array = []
+        begin = 0
+        for m in re.finditer(delim, clean):
+          slice_array.append([begin,m.end()-1])
+          begin = m.end()
+        slice_array.append([begin,None])
+        for idx, sli in enumerate(slice_array):
+          adapted=self.re_t.adapt_regexp(clean[(sli[0]):(sli[1])])
+          ready_for_regex_array.append(adapted)
+        self.outer_bundle_map[clean] = ready_for_regex_array
 
 cmdline_parser = argparse.ArgumentParser()
 customize_cmdline_parser(cmdline_parser)
-
 cmdline_args=cmdline_parser.parse_args()
+
+question_blob=''
+index_blob=''
 
 if cmdline_args.tutorial:
   print('tutorial mode was activated')
 
-index_blob=''
-if cmdline_args.index_file:
+if cmdline_args.default:
+  print('using embedded default_question_list')
+  question_blob=default_question_list
+elif cmdline_args.question_file:
+  print('a question file was specified: ' + cmdline_args.question_file.name)
+  with open(cmdline_args.question_file.name) as f:
+    question_blob=f.read()
+elif cmdline_args.index_file:
   print('an index file was specified: ' + cmdline_args.index_file.name)
   with open(cmdline_args.index_file.name) as f:
     index_blob=f.read()
@@ -73,8 +160,9 @@ else:
     if index_blob != '':
       break
 
-if index_blob == '':
-  print('no index information found, bailing out')
+if( (not (question_blob and not question_blob.isspace())) and (not (index_blob and not index_blob.isspace())) ):
+  #index_blob == '':
+  print('no question index information found, bailing out')
   sys.exit(1)
 
 if cmdline_args.question and cmdline_args.answer:
@@ -87,26 +175,25 @@ else:
   print('we will now show the possible categories')
   print(index_blob)
 
-if cmdline_args.default:
-  print('using embedded default_question_list')
-  for line in default_question_list.splitlines():
-    clean = line.strip()
-    filt = clean.replace('\\','')
-    if ':' in filt:
-      q,a = filt.split(":")
-      quiz[q] = a;
-  words = quiz.keys()
-  for w in words:
-    print(w + '?')
+
+if True:
+  fb = FactBundle()
+  fb.import_questions(question_blob)
+  question = 0
+  answer = 1
+  for current_key in fb.outer_bundle_map.keys():
+    question_prompt=fb.outer_bundle_map[current_key][question]
+    stored_regexp=fb.outer_bundle_map[current_key][answer]
+    print(question_prompt + '?')
     start = time.time()
     s = input('')
     elapsed = (time.time() - start)
-    if s == quiz[w]:
+    if re.match(stored_regexp,s):
       print('Right answer in '+str(round(elapsed,2))+' seconds \n')
     elif s == "":
-      print(quiz[w])
+      print(question_prompt)
     else:
-      print('given answer was ' + s + ' correct answer is ' + quiz[w])
+      print('given answer was ' + s + ' correct answer is ' + stored_regexp)
 
 javascript_css_html_code_="""`
 
@@ -121,7 +208,8 @@ javascript_css_html_code_="""`
     }
 
     function adaptRegexp(regexp) {
-        return regexp.replace(/\{/g,'(').replace(/\}/g,')?');
+        //return regexp.replace(/\{/g,'(').replace(/\}/g,')?');
+        return regexp.replace(/\(/g,'\(').replace(/\)/g,'\)').replace(/\{/g,'(').replace(/\}/g,')?');
     }
 
     class QuestionCloud {
@@ -206,7 +294,7 @@ javascript_css_html_code_="""`
 
         var numTry = 0;
         var questionMapIndex = -1;
-        var promptCat = "integrand";
+        var promptCat = "#integrand";
         //var targetCat = "term";
         var targetCat = "integral";
         var qStack = new Array();
@@ -353,5 +441,41 @@ javascript_css_html_code_="""`
   </div>
 </body>
 
-</html><!-- """ # -->
+</html><!-- """ # 
+
+### special characters
+###   "`"  bsdquiz: no known meaning                  
+###        python3: no meaning
+###        ES6: template literal for multiline string
+###        me: (inside textblobs) skip line entirely 
+###           (necessary for ES6 and python3 to live together)
+
+###   "#"  bsdquiz: no known meaning                  
+###        python3: comment
+###        ES6: multiline string
+###        me: (inside textblobs) denote index information 
+###           (instead of normal question data)
+
+###   ":"  bsdquiz: field delimiter                  
+###        python3: (irrelavant in textblobs) 
+###        ES6: (irrelavant in textblobs)
+###        me (inside textblobs): field delimiter 
+
+###   "|"  bsdquiz: pat|pat  alternative patterns
+###        python3 regexp: alternation
+###        ES6: alternation
+
+###   "{}" bsdquiz: optional pattern
+###        python3 regexp: quantifier
+###        ES6: quantifier
+  
+###   "[]" bsdquiz:delimiters, as in pat[pat|pat]pat
+###        python3 regexp: character class
+###        ES6 regexp: character set (class)
+
+###   "()" bsdquiz: no known meaning 
+###        python3 regexp: capture group
+###        ES6 regexp: capture group   
+
+### -->
 

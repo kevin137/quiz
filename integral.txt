@@ -1,21 +1,22 @@
-Integrate\[x,v\]:x*v - Integrate\[v,x\]
-x^n:(1/(n+1))*x^(n+1) + C, n<>-1
-1/x:Log\[E,Abs\[x\]\] + C
-E^x:E^x + C
-a^x:(1/Log\[E,a\])*a^x + C
-Sin\[x\]:-Cos\[x\] + C
-Cos\[x\]:Sin\[x\] + C
-(Sec\[x\])^2:Tan\[x\] + C
-(Csc\[x\])^2:-Cot\[x\] + C
-(Sec\[x\])*(Tan\[x\]):Sec\[x\] + C
-(Csc\[x\])*(Cot\[x\]):-Csc\[x\] + C
-Tan\[x\]:Log\[E,Abs\[Sec\[x\]\]\] + C
-Cot\[x\]:Log\[E,Abs\[Sin\[x\]\]\] + C
-Sec\[x\]:Log\[E,Abs\[Sec\[x\]+Tan\[x\]\]\] + C
-Csc\[x\]:Log\[E,Abs\[Csc\[x\]-Cot\[x\]\]\] + C
-1/Sqrt\[a^2-x^2\]:ArcSin\[x/a\] + C
-1/(a^2+x^2):(1/a)*ArcTan\[x/a\] + C
-1/(u*Sqrt\[x^2-a^2\]):(1/a)*ArcSec\[x/a\] + C
-1/(a^2-x^2):(1/(2*a))*Log\[E,Abs\[(x+a)/(x-a)\]\] + C
-1/(x^2-a^2):(1/(2*a))*Log\[E,Abs\[(x-a)/(x+a)\]\] + C
+#integrand:integral
+Int u*dv:u*v-Int v du
+x^n (n!=1):(x^(n+1))/(n+1)+C
+1/x:Log\[Abs\[x\]\]+C
+E^x:E^x+C
+a^x:(a^x)/Log\[a\]+C
+Sin\[x\]:-Cos\[x\]+C
+Cos\[x\]:Sin\[x\]+C
+(Sec\[x\])^2:Tan\[x\]+C
+(Csc\[x\])^2:-Cot\[x\]+C
+(Sec\[x\])*(Tan\[x\]):Sec\[x\]+C
+(Csc\[x\])*(Cot\[x\]):-Csc\[x\]+C
+Tan\[x\]:Log\[Abs\[Sec\[x\]\]\]+C
+Cot\[x\]:Log\[Abs\[Sin\[x\]\]\]+C
+Sec\[x\]:Log\[Abs\[Sec\[x\]+Tan\[x\]\]\]+C
+Csc\[x\]:Log\[Abs\[Csc\[x\]-Cot\[x\]\]\]+C
+(a^2-x^2)^(-1/2):ArcSin\[x/a\]+C
+(a^2+x^2)^(-1):(1/a)*ArcTan\[x/a\]+C
+(x*Sqrt\[x^2-a^2\])^(-1):(1/a)*ArcSec\[x/a\]+C
+(a^2-x^2)^(-1):(1/(2*a))*Log\[Abs\[(x+a)/(x-a)\]\]+C
+(x^2-a^2)^(-1):(1/(2*a))*Log\[Abs\[(x-a)/(x+a)\]\]+C
 
