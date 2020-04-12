@@ -85,6 +85,10 @@ class RegexpTransformer:
     'RAWRIGHTCURLY': r')?',
     'ZOINKERS': r'\\)?',
   }
+  def adapt_prompt(self,t):
+    tmp = t
+    tmp = tmp.replace('\\','')
+    return tmp
   def adapt_regexp(self,t):
     tmp = t
     for i in [ '\:','\|','|','\(','\)','(',')','\[','\]','[',']','\{','\}','{','}','\)?' ]:
@@ -108,8 +112,11 @@ class FactBundle:
       print('  key= >>' + k + '<<')
       print(v)
   def import_questions(self, textblob):
+    return_info = {}
+    header_count = 0
     prev=''  
     for line in textblob.splitlines():
+      record = {}
       line = line.strip()
       print('>>'+line+'<<')
       if len(line) == 0:
@@ -121,12 +128,14 @@ class FactBundle:
         prev = line[:-1]
       elif line[0] == HEADER_FLAG:
         print('LINE DETECTED AS HEADER, WILL PROCESS >>'+line+'<<')
+        header_count += 1
       else:
         delim = re.compile(r'[^\\]\:')
         line = prev + line
         prev = ''
         print('VALID LINE DETECTED, WILL PROCESS >>'+line+'<<')
         slice_array = []
+        ready_for_prompt_array = []
         ready_for_regex_array = []
         begin = 0
         for m in re.finditer(FactBundle.delim, line):
@@ -134,9 +143,16 @@ class FactBundle:
           begin = m.end()
         slice_array.append([begin,None])
         for idx, sli in enumerate(slice_array):
-          adapted=self.re_t.adapt_regexp(line[(sli[0]):(sli[1])])
-          ready_for_regex_array.append(adapted)
-        self.outer_bundle_map[line] = ready_for_regex_array
+          current_slice = line[(sli[0]):(sli[1])]
+          ready_for_prompt_array.append(self.re_t.adapt_prompt(current_slice))
+          ready_for_regex_array.append(self.re_t.adapt_regexp(current_slice))
+        record['question_prompt'] = ready_for_prompt_array
+        record['answer_regexp'] = ready_for_regex_array
+        self.outer_bundle_map[line] = record
+        #self.outer_bundle_map[line] = ready_for_regex_array
+    
+    return_info['header_count'] = header_count
+    return return_info
 
 cmdline_parser = argparse.ArgumentParser()
 customize_cmdline_parser(cmdline_parser)
@@ -194,22 +210,25 @@ else:
 
 if True:
   fb = FactBundle()
-  fb.import_questions(question_blob)
+  r_i = fb.import_questions(question_blob)
+  print(r_i)
   fb.dump()
 
   for current_key in fb.outer_bundle_map.keys():
-    question_prompt=fb.outer_bundle_map[current_key][question]
-    stored_regexp=fb.outer_bundle_map[current_key][answer]
+    acceptable_answer=fb.outer_bundle_map[current_key]['question_prompt'][question]
+    question_prompt=fb.outer_bundle_map[current_key]['question_prompt'][question]
+    stored_regexp=fb.outer_bundle_map[current_key]['answer_regexp'][answer]
+    acceptable_answer=fb.outer_bundle_map[current_key]['question_prompt'][answer]
     print(question_prompt + '?')
     start = time.time()
     s = input('')
     elapsed = (time.time() - start)
     if re.match(stored_regexp,s):
-      print('Right answer in '+str(round(elapsed,2))+' seconds \n')
+      print('Acceptable answer \"' + s + '\" in '+str(round(elapsed,2))+' seconds \n')
     elif s == "":
-      print(question_prompt)
+      print('No answer given, an acceptable answer is \"' + acceptable_answer + '\"')
     else:
-      print('given answer was ' + s + ' correct answer is ' + stored_regexp)
+      print('Given answer \"' + s + '\" is unacceptable, acceptable answer is \"' + acceptable_answer + '\"')
 
 javascript_css_html_code_="""`
 
