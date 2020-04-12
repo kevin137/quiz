@@ -175,8 +175,14 @@ if( (not (question_blob and not question_blob.isspace())) and (not (index_blob a
   print('no question or index information found, bailing out')
   sys.exit(1)
 
+# question/answer column defaults in case nothing is specified
+question = 0
+answer = 1
+
 if cmdline_args.question and cmdline_args.answer:
   print('everything is ok')
+  question = int(cmdline_args.question)
+  answer = int(cmdline_args.answer)
   print(cmdline_args.question)
   print(cmdline_args.answer)
 elif cmdline_args.question and not cmdline_args.answer:
@@ -189,8 +195,8 @@ else:
 if True:
   fb = FactBundle()
   fb.import_questions(question_blob)
-  question = 0
-  answer = 1
+  fb.dump()
+
   for current_key in fb.outer_bundle_map.keys():
     question_prompt=fb.outer_bundle_map[current_key][question]
     stored_regexp=fb.outer_bundle_map[current_key][answer]
