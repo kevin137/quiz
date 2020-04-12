@@ -1,0 +1,6 @@
+#integrand:integral
+E^x:E^x+C:\
+a^x:(a^x)/Log\[a\]+C
+Sin\[x\]:-Cos\[x\]+C
+Cos\[x\]:Sin\[x\]+C
+

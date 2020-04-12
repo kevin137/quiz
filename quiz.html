@@ -27,7 +27,9 @@ import sys
 import time
 import argparse
 
-ESCAPING='\x5c'
+TEMPLATE_LITERAL='\u0060'
+ESCAPE_CHARACTER='\u005c'
+HEADER_FLAG='\u0023'
 
 DEFAULT_INDEX_FILE='./index'
 BSDQUIZ_DATA_DIRECTORY='/usr/share/games/bsdgames/quiz'
@@ -95,8 +97,9 @@ class RegexpTransformer:
 
 class FactBundle:
   """fact stuff for quizes"""
-  template_literal_re=re.compile(r'^'+'\x60')
-  header_marker_re=re.compile(r'^'+'#')
+  # TODO: should the re_ be global, private, prefixed by underscores?
+  # TODO: enable multiline headers
+  delim = re.compile(r'[^\\]\:')
   def __init__(self):
     self.re_t = RegexpTransformer()
     self.outer_bundle_map = {}
@@ -104,29 +107,36 @@ class FactBundle:
     for k, v in self.outer_bundle_map.items():
       print('  key= >>' + k + '<<')
       print(v)
-  def import_questions(self, textblob):  
+  def import_questions(self, textblob):
+    prev=''  
     for line in textblob.splitlines():
-      clean = line.strip()
-      print('>>'+clean+'<<')
-      template_literal_re=re.compile(r'^'+'\x60')
-      header_marker_re=re.compile(r'^'+'#')
-      if re.match(template_literal_re,clean):
-        print('LINE DISQUALIFIED, WILL IGNORE >>'+clean+'<<')
-      elif re.match(header_marker_re,clean):
-        print('LINE DETECTED AS HEADER, WILL PROCESS >>'+clean+'<<')
+      line = line.strip()
+      print('>>'+line+'<<')
+      if len(line) == 0:
+        print('LINE HAS ZERO LENGTH, WILL IGNORE >>'+line+'<<')
+      elif TEMPLATE_LITERAL in line:
+        print('LINE DISQUALIFIED BY TEMPLATE_LITERAL, WILL IGNORE >>'+line+'<<')
+      elif line[-1] == ESCAPE_CHARACTER:
+        print('LINE CONTINUATION DETECTED, WILL PROCESS >>'+line+'<<')
+        prev = line[:-1]
+      elif line[0] == HEADER_FLAG:
+        print('LINE DETECTED AS HEADER, WILL PROCESS >>'+line+'<<')
       else:
         delim = re.compile(r'[^\\]\:')
+        line = prev + line
+        prev = ''
+        print('VALID LINE DETECTED, WILL PROCESS >>'+line+'<<')
         slice_array = []
         ready_for_regex_array = []
         begin = 0
-        for m in re.finditer(delim, clean):
+        for m in re.finditer(FactBundle.delim, line):
           slice_array.append([begin,m.end()-1])
           begin = m.end()
         slice_array.append([begin,None])
         for idx, sli in enumerate(slice_array):
-          adapted=self.re_t.adapt_regexp(clean[(sli[0]):(sli[1])])
+          adapted=self.re_t.adapt_regexp(line[(sli[0]):(sli[1])])
           ready_for_regex_array.append(adapted)
-        self.outer_bundle_map[clean] = ready_for_regex_array
+        self.outer_bundle_map[line] = ready_for_regex_array
 
 cmdline_parser = argparse.ArgumentParser()
 customize_cmdline_parser(cmdline_parser)
@@ -162,7 +172,7 @@ else:
 
 if( (not (question_blob and not question_blob.isspace())) and (not (index_blob and not index_blob.isspace())) ):
   #index_blob == '':
-  print('no question index information found, bailing out')
+  print('no question or index information found, bailing out')
   sys.exit(1)
 
 if cmdline_args.question and cmdline_args.answer:
