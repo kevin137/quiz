@@ -26,6 +26,10 @@ import re
 import sys
 import time
 import argparse
+import os
+import tempfile
+import subprocess
+import copy
 
 TEMPLATE_LITERAL='\u0060'
 ESCAPE_CHARACTER='\u005c'
@@ -36,6 +40,8 @@ BSDQUIZ_DATA_DIRECTORY='/usr/share/games/bsdgames/quiz'
 BSDQUIZ_INDEX_FILE=BSDQUIZ_DATA_DIRECTORY+'/index'
 
 def customize_cmdline_parser(p):
+  p.add_argument('-u', '--unit_test_mode', \
+    action='store_true', help='Use regex test mode')
   p.add_argument('-t', '--tutorial', \
     action='store_true', help='Use tutorial mode')
   p.add_argument('-d', '--default', \
@@ -88,6 +94,7 @@ class RegexpTransformer:
   def adapt_prompt(self,t):
     tmp = t
     tmp = tmp.replace('\\','')
+    tmp = tmp + r'?'
     return tmp
   def adapt_regexp(self,t):
     tmp = t
@@ -109,7 +116,7 @@ class FactBundle:
     self.outer_bundle_map = {}
   def dump(self):  
     for k, v in self.outer_bundle_map.items():
-      print('  key= >>' + k + '<<')
+      #print('  key= >>' + k + '<<')
       print(v)
   def import_questions(self, textblob):
     return_info = {}
@@ -118,7 +125,7 @@ class FactBundle:
     for line in textblob.splitlines():
       record = {}
       line = line.strip()
-      print('>>'+line+'<<')
+      #print('>>'+line+'<<')
       if len(line) == 0:
         print('LINE HAS ZERO LENGTH, WILL IGNORE >>'+line+'<<')
       elif TEMPLATE_LITERAL in line:
@@ -130,10 +137,9 @@ class FactBundle:
         print('LINE DETECTED AS HEADER, WILL PROCESS >>'+line+'<<')
         header_count += 1
       else:
-        delim = re.compile(r'[^\\]\:')
         line = prev + line
         prev = ''
-        print('VALID LINE DETECTED, WILL PROCESS >>'+line+'<<')
+        #print('VALID LINE DETECTED, WILL PROCESS >>'+line+'<<')
         slice_array = []
         ready_for_prompt_array = []
         ready_for_regex_array = []
@@ -149,7 +155,6 @@ class FactBundle:
         record['question_prompt'] = ready_for_prompt_array
         record['answer_regexp'] = ready_for_regex_array
         self.outer_bundle_map[line] = record
-        #self.outer_bundle_map[line] = ready_for_regex_array
     
     return_info['header_count'] = header_count
     return return_info
@@ -160,6 +165,69 @@ cmdline_args=cmdline_parser.parse_args()
 
 question_blob=''
 index_blob=''
+
+
+if cmdline_args.unit_test_mode:
+  print('line-by-line unit test mode was activated')
+  test_string = cmdline_args.question
+
+  fb = FactBundle()
+  r_i = fb.import_questions(test_string)
+  fb.dump()
+  #print('\nBUILT-IN PART DONE\n')
+
+  slice_ranges = []
+  bsdquiz_test_record = {}
+  bsdquiz_prompt_array = []
+  bsdquiz_pseudoregex_array = []
+  begin = 0
+  for m in re.finditer(fb.delim, test_string):
+    slice_ranges.append([begin,m.end()-1])
+    begin = m.end()
+  slice_ranges.append([begin,None])
+  num_col = len(slice_ranges)
+  temp_index_file_col_header = ''
+  for i, s in enumerate(slice_ranges):
+    bsdquiz_pseudoregex_array.append(test_string[(s[0]):(s[1])])
+    temp_index_file_col_header += ':'+str(i)
+  #print('temp_index_file_col_header  '+temp_index_file_col_header)
+  temp_question_file = tempfile.NamedTemporaryFile(delete=False)
+  temp_index_file = tempfile.NamedTemporaryFile(delete=False)
+  temp_question_file.write(bytes(test_string+'\n', 'utf-8'))
+  temp_question_file.close()
+  temp_index_file.write(bytes(temp_question_file.name+temp_index_file_col_header+'\n','utf-8'))
+  temp_index_file.close()
+  for i, s in enumerate(slice_ranges):
+    complement = []
+    for j in range(0, num_col):
+      complement.append(j)
+    just_popped = complement.pop(i)
+    #print("index "+str(i)+"   just_popped "+str(just_popped))
+    #print(complement)
+    current_slice = test_string[(s[0]):(s[1])]
+    bsdquiz = subprocess.Popen(["quiz", "-i", temp_index_file.name, str(i), str(complement[0])],
+                          stdin=subprocess.PIPE,
+                          stdout=subprocess.PIPE,
+                          stderr=subprocess.PIPE,
+                          universal_newlines=True,
+                          bufsize=0)
+    bsdquiz.stdin.write("blarg\n")
+    bsdquiz.stdin.close()
+    #print('stdout')
+    for index, line in enumerate(bsdquiz.stdout):
+      if index == 0:
+        bsdquiz_prompt_array.append(line.strip())
+      #print(line.strip())
+    #print('stderr')
+    #for line in bsdquiz.stderr:
+      #print(line.strip())
+  os.remove(temp_question_file.name)
+  os.remove(temp_index_file.name)
+  bsdquiz_test_record['question_prompt'] = bsdquiz_prompt_array
+  bsdquiz_test_record['answer_regexp'] = bsdquiz_pseudoregex_array
+  print(bsdquiz_test_record)
+  #print('\nBSD QUIZ PART DONE\n')
+  sys.exit(1)
 
 if cmdline_args.tutorial:
   print('tutorial mode was activated')
@@ -215,11 +283,10 @@ if True:
   fb.dump()
 
   for current_key in fb.outer_bundle_map.keys():
-    acceptable_answer=fb.outer_bundle_map[current_key]['question_prompt'][question]
     question_prompt=fb.outer_bundle_map[current_key]['question_prompt'][question]
     stored_regexp=fb.outer_bundle_map[current_key]['answer_regexp'][answer]
     acceptable_answer=fb.outer_bundle_map[current_key]['question_prompt'][answer]
-    print(question_prompt + '?')
+    print(question_prompt)
     start = time.time()
     s = input('')
     elapsed = (time.time() - start)
