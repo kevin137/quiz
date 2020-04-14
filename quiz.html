@@ -92,7 +92,11 @@ class RegexpTransformer:
   }
   def adapt_prompt(self,t):
     tmp = t
-    tmp = tmp.replace('\\','')
+    tmp = re.sub(r'([^|]*)\|(.*)',r'\1',tmp)  # select left-most option
+    #tmp = re.sub(r'[^\\]\[([^|]*[^\\])\|(.*)[^\\]\]',r'\1',tmp)  # select left-most option
+    tmp = re.sub(r'([^\\])([\\\[\]\{\}])',r'\1',tmp)
+    #tmp = re.sub(r'[\\\[\]\{\}]',r'',tmp)  # eliminate
+    #tmp = tmp.replace('\\','')
     tmp = tmp + r'?'
     return tmp
   def adapt_regexp(self,t):
